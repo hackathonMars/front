@@ -19,7 +19,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className={`${theme === 'light' ? "navbar shadow-md sticky bg-white top-0 z-[100] px-4 py-2" : "navbar shadow-md sticky bg-base-800 top-0 z-[100] px-4 py-2" }`}>
+    <div className={`${theme === 'light' ? "navbar shadow-md sticky bg-white top-0 z-[100] px-4 py-2" : "navbar shadow-md sticky bg-base-200 top-0 z-[100] px-4 py-2" }`}>
       <div className="flex-1">
         <a className="text-2xl font-bold text-green-600">EcoGram</a>
       </div>
