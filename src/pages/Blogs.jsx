@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import PublicationCard from "../components/PublicationCard"; // Adjust the path as needed
+import PublicationCard from "../components/PublicationCard";
+
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
@@ -9,39 +9,44 @@ const Blogs = () => {
 
   useEffect(() => {
     const fetchBlogs = async () => {
-        const response = await axios.get("https://71f0-185-213-230-50.ngrok-free.app/blogs/");
-        setBlogs(response.data);
       try {
-        
-        
-      } catch (err) {
-        setError(err);
-        console.log(response.data);
+        const response = await fetch("https://a0d3-185-213-230-50.ngrok-free.app/blogs/");
+        if (!response.ok) {
+          throw new Error("Failed to fetch data");
+        }
+        const data = await response.json();
+        setBlogs(data);
+        console.log(data)
+      } catch (error) {
+        setError(error.message);
       } finally {
         setLoading(false);
       }
     };
 
-    
-
     fetchBlogs();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error loading blogs: {error.message}</p>;
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
   return (
-    <div className="blogs-container">
+    <div className="space-y-4">
       {blogs.map((blog) => (
         <PublicationCard
-          key={blog.id} // Ensure that each blog has a unique id
-          avatar={blog.user.avatar || "https://randomuser.me/api/portraits/men/32.jpg"} // Assuming user object contains an avatar property
+          key={blog.id}
+          avatar={blog.image}
           username={blog.user.full_name}
-          time={blog.created_at}
-          title={blog.title}
+          time={new Date(blog.created_at).toLocaleString()}
+          text={blog.title}
           image={blog.image}
           likes={blog.likes_count}
-          commentsCount={blog.comments_count} // Assuming there is a comments_count property
+          commentsCount={blog.comments_count}
         />
       ))}
     </div>
