@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { CgAddR } from "react-icons/cg";
 import { AiOutlineHome } from "react-icons/ai";
 import { IoPersonCircleOutline } from "react-icons/io5";
+import { MdOutlineReportGmailerrorred } from "react-icons/md";
 
 const Footer = () => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -29,13 +30,13 @@ const Footer = () => {
     <div className="fixed bottom-0 left-0 w-full bg-base-300">
       <div className="btm-nav text-xl">
         <Link to="/" className={linkClass("/")}>
-        <AiOutlineHome /> 
+          <AiOutlineHome />
         </Link>
-        <Link to="/create/post" className={linkClass("/create/post")}>
-        <CgAddR />
+        <Link to="/create/blog" className={linkClass("/create/blog")}>
+          <CgAddR />
         </Link>
         <Link to="/create/report" className={linkClass("/create/report")}>
-        <MdOutlineReportGmailerrorred />
+          <MdOutlineReportGmailerrorred />
         </Link>
         <Link to="/profile" className={linkClass("/profile")}>
           <IoPersonCircleOutline />
