@@ -27,7 +27,7 @@ const Sidebar = () => {
               <MdOutlineReportGmailerrorred className='text-xl'/> Отправить жалобу
           </Link>
           <Link to="/create/blog" className={`${getLinkClass('/')} py-3`}>
-            <CgAddR className='text-xl'/>Суздать пост
+            <CgAddR className='text-xl'/>Создать пост
           </Link>
           <Link to={'/profile'} className={`${getLinkClass('/')} py-3`}>
               <IoPersonCircleOutline className='text-xl'/> Profile

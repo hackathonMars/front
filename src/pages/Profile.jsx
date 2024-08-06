@@ -8,15 +8,13 @@ const Profile = () => {
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         {/* Cover Photo */}
         <div className="relative h-56">
-          <img
-            className="w-full h-full object-cover"
-            src="https://via.placeholder.com/1500x500"
-            alt="Cover"
-          />
+          <div className="w-full h-full bg-gray-300">
+
+          </div>
           <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2">
             <img
               className="w-32 h-32 rounded-full border-4 border-white"
-              src="https://randomuser.me/api/portraits/men/32.jpg"
+              src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"
               alt="Profile"
             />
           </div>
@@ -24,7 +22,7 @@ const Profile = () => {
 
         {/* Profile Info */}
         <div className="text-center mt-16">
-          <h2 className="text-3xl font-semibold text-gray-900">John Doe</h2>
+          <h2 className="text-3xl font-semibold text-gray-900">Kamoliddin Mukhamedov</h2>
         </div>
 
         {/* Profile Sections */}

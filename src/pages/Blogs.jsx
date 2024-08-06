@@ -10,7 +10,7 @@ const Blogs = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
         try {
-          const response = await axios.get("https://1816-185-213-230-50.ngrok-free.app/blogs/", {
+          const response = await axios.get("http://localhost:8000/blogs/", {
             headers: {
               'Accept': 'application/json'
             }
@@ -38,17 +38,17 @@ const Blogs = () => {
 
   return (
     <div className="space-y-4">
+      {console.log(blogs)}
       {blogs.length > 0 ? (
         blogs.map((blog) => (
           <PublicationCard
             key={blog.id}
             avatar={blog.image}
             username={blog.user.full_name}
-            time={new Date(blog.created_at).toLocaleString()}
+            time={blog.created_at}
             text={blog.title}
             image={blog.image}
             likes={blog.likes_count}
-            commentsCount={blog.comments_count}
           />
         ))
       ) : (

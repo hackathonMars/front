@@ -1,85 +1,65 @@
-import React, { useState } from 'react';
+import { useState } from "react";
 
 const Add = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const [title, setTitle] = useState("");
   const [image, setImage] = useState(null);
-  const [location, setLocation] = useState({ lat: null, lng: null });
+  const [userId] = useState(1);
 
-  const handleImageChange = (e) => {
-    if (e.target.files && e.target.files[0]) {
-      setImage(URL.createObjectURL(e.target.files[0]));
-    } else {
-      setImage(null);
-    }
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log({
-      title,
-      description,
-      image,
-      location
-    });
-  };
 
-  const getCurrentLocation = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition((position) => {
-        setLocation({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude
-        });
-      }, (error) => {
-        console.error('Error getting location', error);
+    try {
+      let imageUrl = "";
+      if (image) {
+        imageUrl = await uploadImage(image);
+      }
+
+      const response = await fetch("http://localhost:8000/blogs/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          title,
+          user_id: userId,
+        }),
       });
-    } else {
-      alert('Geolocation is not supported by this browser.');
+
+      if (!response.ok) {
+        throw new Error(`Error posting data: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log("Response:", data);
+    } catch (error) {
+      console.error("Error:", error);
     }
   };
-
-  React.useEffect(() => {
-    getCurrentLocation();
-  }, []);
 
   return (
     <div className="p-2 mb-14 max-w-[100%] flex flex-col items-center mt-[10%]">
-      <div className='w-full max-w-[60%]'>
-      <h2 className="text-2xl font-bold text-center mb-4">Публикация</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-2">Название</label>
-          <input
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="input input-bordered w-full"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-2">Описание</label>
-          <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            className="textarea textarea-bordered w-full"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium mb-2">Выберите фотографию</label>
-          <input
-            type="file"
-            accept="image/*"
-            capture="environment"
-            onChange={handleImageChange}
-            className="file-input file-input-bordered w-full"
-            required
-          />
-        </div>
-        <button type="submit" className="btn btn-success w-full">Выполнить</button>
-      </form>
+      <div className="w-full max-w-[60%]">
+        <h2 className="text-2xl font-bold text-center mb-4">Публикация</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label className="block text-sm font-medium mb-2">Название</label>
+            <input
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="input input-bordered w-full"
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-sm font-medium mb-2">
+              Выберите фотографию
+            </label>
+            <input type="file" accept="image/*" onChange={(e) => setImage(URL.createObjectURL(e.target.files[0]))} />
+          </div>
+          <button type="submit" className="btn btn-success w-full">
+            Выполнить
+          </button>
+        </form>
       </div>
     </div>
   );

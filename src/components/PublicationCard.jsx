@@ -9,8 +9,7 @@ const PublicationCard = ({
   time,
   text,
   image,
-  likes,
-  commentsCount
+  likes
 }) => {
   const [showCommentInput, setShowCommentInput] = useState(false);
   const [comment, setComment] = useState("");
@@ -38,31 +37,30 @@ const PublicationCard = ({
         <div className="flex items-center">
           <img
             className="w-10 h-10 rounded-full mr-4"
-            src={avatar || "https://randomuser.me/api/portraits/men/32.jpg"}
+            src={avatar || "https://www.filmsforaction.org/img/o/5eddc625-8cd8-4da6-8bcb-d81d14a0d481.jpg"}
             alt="Avatar"
           />
           <div className="text-sm">
-            <p className="text-gray-900 leading-none">{username || "John Doe"}</p>
+            <p className="text-gray-900 leading-none">{username || "Kamoliddin Mukhamedov"}</p>
             <p className="text-gray-600">{time || "2 hours ago"}</p>
           </div>
         </div>
         <div className="mt-4">
           <p className="mt-2 text-gray-700">
-            {text || "If a dog chews shoes whose shoes does he choose?"}
+            {text || "Hello World"}
           </p>
         </div>
       </div>
       {image && (
         <img
           className="w-full"
-          src={image || "https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"}
+          src={"https://www.filmsforaction.org/img/o/5eddc625-8cd8-4da6-8bcb-d81d14a0d481.jpg"}
           alt="Post"
         />
       )}
       <div className="px-4 py-4 border-t border-gray-200">
         <div className="flex items-center justify-between border-b pb-2">
-          <p>{likes || "32 likes"}</p>
-          <p>{commentsCount || "21 comments"}</p>
+          <p>{likes} likes</p>
         </div>
         <div className="flex justify-around pt-2">
           <button className="flex items-center space-x-2 text-gray-600 hover:text-blue-600">
@@ -112,7 +110,7 @@ const PublicationCard = ({
                     <div className="w-10 rounded-full">
                       <img
                         alt="Comment Avatar"
-                        src="https://randomuser.me/api/portraits/men/32.jpg"
+                        src="https://t4.ftcdn.net/jpg/02/29/75/83/360_F_229758328_7x8jwCwjtBMmC6rgFzLFhZoEpLobB6L8.jpg"
                       />
                     </div>
                   </div>
