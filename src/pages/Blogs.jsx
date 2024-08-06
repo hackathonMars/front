@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import PublicationCard from "../components/PublicationCard";
-
 
 const Blogs = () => {
   const [blogs, setBlogs] = useState([]);
@@ -9,22 +9,23 @@ const Blogs = () => {
 
   useEffect(() => {
     const fetchBlogs = async () => {
-      try {
-        const response = await fetch("https://a0d3-185-213-230-50.ngrok-free.app/blogs/");
-        if (!response.ok) {
-          throw new Error("Failed to fetch data");
+        try {
+          const response = await axios.get("https://1816-185-213-230-50.ngrok-free.app/blogs/", {
+            headers: {
+              'Accept': 'application/json'
+            }
+          });
+          console.log("Response Data:", response.data); // Log fetched data
+          setBlogs(response.data.data || []); // Access the nested data
+        } catch (error) {
+          console.error("Fetch Error:", error); // Log errors
+          setError("An error occurred while fetching data. Please try again later.");
+        } finally {
+          setLoading(false);
         }
-        const data = await response.json();
-        setBlogs(data);
-        console.log(data)
-      } catch (error) {
-        setError(error.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchBlogs();
+      };
+  
+      fetchBlogs();
   }, []);
 
   if (loading) {
@@ -37,18 +38,22 @@ const Blogs = () => {
 
   return (
     <div className="space-y-4">
-      {blogs.map((blog) => (
-        <PublicationCard
-          key={blog.id}
-          avatar={blog.image}
-          username={blog.user.full_name}
-          time={new Date(blog.created_at).toLocaleString()}
-          text={blog.title}
-          image={blog.image}
-          likes={blog.likes_count}
-          commentsCount={blog.comments_count}
-        />
-      ))}
+      {blogs.length > 0 ? (
+        blogs.map((blog) => (
+          <PublicationCard
+            key={blog.id}
+            avatar={blog.image}
+            username={blog.user.full_name}
+            time={new Date(blog.created_at).toLocaleString()}
+            text={blog.title}
+            image={blog.image}
+            likes={blog.likes_count}
+            commentsCount={blog.comments_count}
+          />
+        ))
+      ) : (
+        <div>No blogs found</div>
+      )}
     </div>
   );
 };
