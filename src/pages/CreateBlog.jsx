@@ -39,14 +39,14 @@ const Add = () => {
     }
   };
 
-  // Call getCurrentLocation when component mounts
   React.useEffect(() => {
     getCurrentLocation();
   }, []);
 
   return (
-    <div className="p-2 mb-14">
-      <h2 className="text-2xl mb-4">Публикация</h2>
+    <div className="p-2 mb-14 max-w-[100%] flex flex-col items-center mt-[10%]">
+      <div className='w-full max-w-[60%]'>
+      <h2 className="text-2xl font-bold text-center mb-4">Публикация</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-sm font-medium mb-2">Название</label>
@@ -77,10 +77,10 @@ const Add = () => {
             className="file-input file-input-bordered w-full"
             required
           />
-          {image && <img src={image} alt="Selected" className="mt-4 w-full h-auto" />}
         </div>
-        <button type="submit" className="btn btn-success">Выполнить</button>
+        <button type="submit" className="btn btn-success w-full">Выполнить</button>
       </form>
+      </div>
     </div>
   );
 };
