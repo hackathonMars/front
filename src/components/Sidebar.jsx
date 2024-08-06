@@ -21,16 +21,16 @@ const Sidebar = () => {
       <div className="w-2/12 bg-base-200 p-4">
         <ul className="menu min-h-full gap-2 text-white font-semibold">
           <Link to={'/'} className={`${getLinkClass('/')} py-3`}>
-              <AiOutlineHome /> Публикации
+              <AiOutlineHome className='text-xl'/> Публикации
           </Link>
           <Link to={'/create/report'} className={`${getLinkClass('/')} py-3`}>
-              <MdOutlineReportGmailerrorred /> Отправить жалобу
+              <MdOutlineReportGmailerrorred className='text-xl'/> Отправить жалобу
           </Link>
           <Link to="/create/blog" className={`${getLinkClass('/')} py-3`}>
-            <CgAddR />Суздать пост
+            <CgAddR className='text-xl'/>Суздать пост
           </Link>
           <Link to={'/profile'} className={`${getLinkClass('/')} py-3`}>
-              <IoPersonCircleOutline /> Profile
+              <IoPersonCircleOutline className='text-xl'/> Profile
           </Link>
         </ul>
       </div>
