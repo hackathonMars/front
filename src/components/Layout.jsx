@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
-import BottomNavigation from './BottomNavigation';
+
 import Sidebar from './Sidebar';
-import Navbar from './Navbar'; // Assuming you have a Navbar component
+import Navbar from './Navbar';
+import Footer from './Footer';
 
 const Layout = () => {
   const [widthWindow, setWidthWindow] = useState(window.innerWidth);
@@ -26,7 +27,7 @@ const Layout = () => {
           <Outlet />
         </div>
       </div>
-      {widthWindow < 1024 && <BottomNavigation />}
+      {widthWindow < 1024 && <Footer />}
     </div>
   );
 };

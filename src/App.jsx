@@ -1,12 +1,16 @@
-import Layout from "./components/Layout";
-import Navbar from "./components/Navbar";
+import { Outlet } from "react-router"
+import Layout from "./components/Layout"
+
 
 function App() {
+
   return (
     <>
-      <Layout />
+      <Layout>
+        <Outlet />
+      </Layout>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
